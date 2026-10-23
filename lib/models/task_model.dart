@@ -34,4 +34,31 @@ class TaskModel {
       createdAt: createdAt ?? this.createdAt,
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'category': category,
+      'priority': priority.name,
+      'createdAt': createdAt.toIso8601String(),
+      'isCompleted': isCompleted,
+    };
+  }
+
+  factory TaskModel.fromJson(Map<String, dynamic> json) {
+    return TaskModel(
+      id: json['id'] as String,
+      title: json['title'] as String,
+      category: json['category'] as String,
+      priority: TaskPriority.values.firstWhere(
+        (p) => p.name == json['priority'],
+        orElse: () => TaskPriority.medium,
+      ),
+      createdAt: json['createdAt'] != null
+          ? DateTime.tryParse(json['createdAt'] as String)
+          : null,
+      isCompleted: json['isCompleted'] as bool? ?? false,
+    );
+  }
 }
