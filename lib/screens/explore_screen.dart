@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'course_detail_screen.dart';
 
 class ExploreScreen extends StatefulWidget {
   const ExploreScreen({super.key});
@@ -212,7 +213,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
                       itemBuilder: (context, i) {
                         final item = _filteredItems[i];
                         return Container(
-                          padding: const EdgeInsets.all(16),
                           decoration: BoxDecoration(
                             color: Theme.of(context).cardColor,
                             borderRadius: BorderRadius.circular(16),
@@ -224,7 +224,22 @@ class _ExploreScreenState extends State<ExploreScreen> {
                               ),
                             ],
                           ),
-                          child: Row(
+                          child: Material(
+                            color: Colors.transparent,
+                            borderRadius: BorderRadius.circular(16),
+                            child: InkWell(
+                              borderRadius: BorderRadius.circular(16),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => CourseDetailScreen(item: item),
+                                  ),
+                                );
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(16),
+                                child: Row(
                             children: [
                               Container(
                                 padding: const EdgeInsets.all(12),
@@ -296,8 +311,11 @@ class _ExploreScreenState extends State<ExploreScreen> {
                               ),
                             ],
                           ),
-                        );
-                      },
+                        ),
+                      ),
+                    ),
+                  );
+                },
                     ),
             ),
           ],
