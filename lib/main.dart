@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'providers/settings_provider.dart';
 import 'providers/auth_provider.dart';
+import 'providers/task_provider.dart';
 import 'screens/auth/login_screen.dart';
 import 'screens/home_screen.dart';
+import 'screens/tasks_screen.dart';
 import 'screens/explore_screen.dart';
 import 'screens/profile_screen.dart';
 import 'screens/settings_screen.dart';
@@ -14,6 +16,7 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => SettingsProvider()),
         ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => TaskProvider()),
       ],
       child: const MyApp(),
     ),
@@ -71,6 +74,7 @@ class _MainShellState extends State<MainShell> {
 
   static const List<Widget> _screens = [
     HomeScreen(),
+    TasksScreen(),
     ExploreScreen(),
     ProfileScreen(),
     SettingsScreen(),
@@ -81,6 +85,11 @@ class _MainShellState extends State<MainShell> {
       icon: Icon(Icons.home_outlined),
       selectedIcon: Icon(Icons.home),
       label: 'Home',
+    ),
+    NavigationDestination(
+      icon: Icon(Icons.task_alt_outlined),
+      selectedIcon: Icon(Icons.task_alt),
+      label: 'Tasks',
     ),
     NavigationDestination(
       icon: Icon(Icons.explore_outlined),
